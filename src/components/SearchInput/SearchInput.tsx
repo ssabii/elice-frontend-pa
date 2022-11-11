@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback } from "react";
+import React, { ChangeEvent, useCallback, useState } from "react";
 import styled from "styled-components";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +10,8 @@ export interface SearchInputProps {
 }
 
 const SearchInput = ({ value, placeholder, onChange }: SearchInputProps) => {
+  const [isFocused, setIsFocused] = useState(false);
+
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       onChange?.(e.target.value);
@@ -18,7 +20,11 @@ const SearchInput = ({ value, placeholder, onChange }: SearchInputProps) => {
   );
 
   return (
-    <Container>
+    <Container
+      isFocused={isFocused}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+    >
       <IconWrapper>
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </IconWrapper>
@@ -35,12 +41,15 @@ const SearchInput = ({ value, placeholder, onChange }: SearchInputProps) => {
 
 export default SearchInput;
 
-const Container = styled.div`
+const Container = styled.div<{ isFocused?: boolean }>`
   display: flex;
   width: 100%;
   padding: 12px 0;
-  border: 1px solid rgb(201, 202, 204);
+  border: 1px solid
+    ${({ isFocused }) =>
+      isFocused ? "rgb(82, 79, 161)" : "rgb(201, 202, 204)"};
   border-radius: 4px;
+  background: white;
 `;
 
 const IconWrapper = styled.div`
