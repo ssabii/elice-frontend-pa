@@ -7,7 +7,9 @@ const Layout = () => {
     <>
       <Header />
       <Main>
-        <Outlet />
+        <Container>
+          <Outlet />
+        </Container>
       </Main>
     </>
   );
@@ -35,4 +37,14 @@ const Main = styled.main`
   flex-direction: column;
   min-height: calc(100vh - 64px);
   background-color: rgb(240, 241, 243);
+`;
+
+const Container = styled.div`
+  margin: 0 auto;
+  padding: 24px;
+  width: 1280px;
+
+  @media (max-width: 1279px) {
+    width: 100%;
+  }
 `;
