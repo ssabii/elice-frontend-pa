@@ -1,8 +1,8 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
 
-import Layout from "layouts/Layout";
-import CoursePage from "pages/course/CoursePage";
+import Layout from "layouts";
+import CoursePage from "pages/course";
+import { Route, Routes } from "react-router-dom";
 
 const Router = () => {
   return (

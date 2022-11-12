@@ -1,7 +1,8 @@
 import React, { ChangeEvent, useCallback, useState } from "react";
-import styled from "styled-components";
+
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styled from "styled-components";
 
 export interface SearchInputProps {
   value?: string;

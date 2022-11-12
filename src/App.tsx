@@ -1,7 +1,8 @@
 import React from "react";
+
 import { BrowserRouter } from "react-router-dom";
-import GlobalStyle from "styles";
 import Router from "routes";
+import GlobalStyle from "styles";
 
 import "sanitize.css";
 

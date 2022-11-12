@@ -1,5 +1,7 @@
 import React from "react";
+
 import styled from "styled-components";
+
 import FilterContent from "./FilterContent";
 import FilterItem from "./FilterItem";
 import FilterLabel from "./FilterLabel";

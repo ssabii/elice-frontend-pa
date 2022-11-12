@@ -1,5 +1,7 @@
 import React from "react";
+
 import styled from "styled-components";
+
 import { getStyle } from "./style";
 
 export type Variant = "default" | "primary";

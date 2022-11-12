@@ -1,4 +1,5 @@
 import { css } from "styled-components";
+
 import { Variant } from "./Chip";
 
 export const getStyle = (variant: Variant = "default") => {
