@@ -15,7 +15,7 @@ export default FilterContent;
 const Element = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 8px;
+  margin: 8px 16px;
   -webkit-box-align: center;
   align-items: center;
   gap: 16px;
