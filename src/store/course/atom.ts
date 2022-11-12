@@ -14,8 +14,8 @@ export const priceFilterState = atom<PriceFilter[]>({
   ],
 });
 
-export const paginationState = atom({
-  key: "paginationState",
+export const pageState = atom({
+  key: "pageState",
   default: {
     offset: 0,
     count: 0,

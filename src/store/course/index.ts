@@ -1,1 +1,1 @@
-export { keywordState, priceFilterState, paginationState } from "./atom";
+export { keywordState, priceFilterState, pageState } from "./atom";

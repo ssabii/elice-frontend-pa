@@ -1,18 +1,18 @@
 import { useRecoilState } from "recoil";
-import { keywordState, paginationState, priceFilterState } from "store/course";
+import { keywordState, pageState, priceFilterState } from "store/course";
 
 const useCourse = () => {
   const [keyword, setKeyword] = useRecoilState(keywordState);
   const [priceFilter, setPriceFilter] = useRecoilState(priceFilterState);
-  const [pagination, setPagination] = useRecoilState(paginationState);
+  const [page, setPage] = useRecoilState(pageState);
 
   return {
     keyword,
     priceFilter,
-    pagination,
+    page,
     setKeyword,
     setPriceFilter,
-    setPagination,
+    setPage,
   };
 };
 
