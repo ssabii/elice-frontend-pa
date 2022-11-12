@@ -57,9 +57,13 @@ const Card = styled.div`
   background-color: white;
 `;
 
-const CardHeader = styled.div``;
+const CardHeader = styled.div`
+  flex: 1 1 0;
+`;
 
-const CardBody = styled.div``;
+const CardBody = styled.div`
+  flex: 1 1 0;
+`;
 
 const Label = styled.div`
   margin-bottom: 8px;
