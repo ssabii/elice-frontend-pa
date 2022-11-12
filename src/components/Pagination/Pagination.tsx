@@ -11,17 +11,17 @@ import { getStyle } from "./style";
 
 export interface PaginationProps {
   current: number;
-  total: number;
+  count: number;
   onPageChange?: (page: number) => void;
 }
 
-const Pagination = ({ current, total, onPageChange }: PaginationProps) => {
-  if (current < 1 || total < 1) {
-    throw new Error("current and total must be greater than zero");
+const Pagination = ({ current, count, onPageChange }: PaginationProps) => {
+  if (current < 1 || count < 1) {
+    throw new Error("current and count must be greater than zero");
   }
 
-  if (current > total) {
-    throw new Error("current must be less than or equal to total");
+  if (current > count) {
+    throw new Error("current must be less than or equal to count");
   }
 
   const handlePageChange = useCallback(
@@ -42,7 +42,7 @@ const Pagination = ({ current, total, onPageChange }: PaginationProps) => {
   const pages = useMemo(() => {
     const boxes = [];
     const left = Math.max(1, current - 4);
-    const right = Math.min(current + 4, total);
+    const right = Math.min(current + 4, count);
 
     for (let page = left; page <= right; page++) {
       boxes.push(
@@ -57,7 +57,7 @@ const Pagination = ({ current, total, onPageChange }: PaginationProps) => {
     }
 
     return boxes;
-  }, [current, total, handlePageChange]);
+  }, [current, count, handlePageChange]);
 
   return (
     <Container>
@@ -65,7 +65,7 @@ const Pagination = ({ current, total, onPageChange }: PaginationProps) => {
         <FontAwesomeIcon icon={faChevronLeft} />
       </Arrow>
       {pages}
-      <Arrow disabled={current === total} onClick={handleNextClick}>
+      <Arrow disabled={current === count} onClick={handleNextClick}>
         <FontAwesomeIcon icon={faChevronRight} />
       </Arrow>
     </Container>
