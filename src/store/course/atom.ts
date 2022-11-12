@@ -19,6 +19,6 @@ export const paginationState = atom({
   default: {
     offset: 0,
     count: 0,
-    total: 0,
+    totalCount: 0,
   },
 });
