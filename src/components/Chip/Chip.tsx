@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import styled from "styled-components";
 
@@ -8,11 +8,20 @@ export type Variant = "default" | "primary";
 
 export interface ChipProps {
   variant?: Variant;
+  onClick?: () => void;
   children: React.ReactNode;
 }
 
-const Chip = ({ variant = "default", children }: ChipProps) => {
-  return <Element variant={variant}>{children}</Element>;
+const Chip = ({ variant = "default", onClick, children }: ChipProps) => {
+  const handleClick = useCallback(() => {
+    onClick?.();
+  }, [onClick]);
+
+  return (
+    <Element variant={variant} onClick={handleClick}>
+      {children}
+    </Element>
+  );
 };
 
 export default Chip;
