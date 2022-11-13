@@ -34,7 +34,7 @@ const Element = styled.span<{ variant: Variant }>`
   min-width: 30px;
   border-radius: 999px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   transition: all 150ms ease-in-out 0s;
   cursor: pointer;
   ${({ variant }) => getStyle(variant)};
