@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import { useSearchParams } from "react-router-dom";
 
@@ -9,8 +9,16 @@ export interface CourseFilterParams {
 
 const useCourseFilter = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const keyword = searchParams.get("keyword") ?? "";
-  const price = searchParams.getAll("price") ?? [];
+
+  const keyword = useMemo(
+    () => searchParams.get("keyword") ?? "",
+    [searchParams],
+  );
+
+  const price = useMemo(
+    () => searchParams.getAll("price") ?? [],
+    [searchParams],
+  );
 
   const navigateSearch = useCallback(
     (params: CourseFilterParams) => {
