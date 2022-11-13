@@ -1,54 +1,73 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import Chip from "components/Chip";
 import Filter from "components/Filter";
 import SearchInput from "components/SearchInput";
-import useCourse from "hooks/course/useCourse";
+import useCourseFilter from "hooks/course";
+import { debounce } from "lodash-es";
 import styled from "styled-components";
 
+const DEBOUNCE_DELAY = 300;
+
+const priceItems = [
+  { label: "무료", value: "free" },
+  { label: "유료", value: "paid" },
+];
+
 const CourseFilter = () => {
-  const { keyword, priceFilter, setKeyword, setPriceFilter } = useCourse();
+  const { keyword, price, navigateSearch } = useCourseFilter();
+  const [value, setValue] = useState(keyword);
+
+  const debouncedSearch = useMemo(
+    () =>
+      debounce((value) => {
+        navigateSearch({ keyword: value });
+      }, DEBOUNCE_DELAY),
+    [navigateSearch],
+  );
 
   const handleKeywordChange = useCallback(
     (value: string) => {
-      setKeyword(value);
+      setValue(value);
+      debouncedSearch(value);
     },
-    [setKeyword],
+    [debouncedSearch],
   );
 
   const handlePriceClick = useCallback(
-    (label: string) => () => {
-      const newPriceFilter = priceFilter.map((item) => {
-        return item.label === label
-          ? { ...item, isSelected: !item.isSelected }
-          : item;
-      });
-
-      setPriceFilter(newPriceFilter);
+    (value: string) => () => {
+      const newPrice = price.includes(value)
+        ? price.filter((item) => item !== value)
+        : [...price, value];
+      navigateSearch({ price: newPrice });
     },
-    [priceFilter, setPriceFilter],
+    [price, navigateSearch],
   );
 
   return (
     <Container>
       <SearchInput
         placeholder="배우고 싶은 언어, 기술을 검색해 보세요"
-        value={keyword}
+        value={value}
         onChange={handleKeywordChange}
       />
       <Filter>
         <Filter.Item>
           <Filter.Label>가격</Filter.Label>
           <Filter.Content>
-            {priceFilter.map(({ label, isSelected }) => (
-              <Chip
-                key={label}
-                variant={isSelected ? "primary" : "default"}
-                onClick={handlePriceClick(label)}
-              >
-                {label}
-              </Chip>
-            ))}
+            {priceItems.map(({ label, value }) => {
+              const active = price.includes(value);
+
+              return (
+                <Chip
+                  key={value}
+                  variant={active ? "primary" : "default"}
+                  onClick={handlePriceClick(value)}
+                >
+                  {label}
+                </Chip>
+              );
+            })}
           </Filter.Content>
         </Filter.Item>
       </Filter>

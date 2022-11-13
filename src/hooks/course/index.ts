@@ -1,1 +1,1 @@
-export { default } from "./useCourse";
+export { default } from "./useCourseFilter";
