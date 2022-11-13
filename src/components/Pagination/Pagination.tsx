@@ -84,7 +84,6 @@ const Box = styled.button<{ active?: boolean }>`
   margin: 0 6px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.5s ease;
   ${({ active }) => getStyle(active)};
 `;
 
