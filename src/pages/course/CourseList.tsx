@@ -6,13 +6,14 @@ import useCourses from "queries/course/useCourses";
 import styled from "styled-components";
 
 import CourseCard from "./CourseCard";
+import CourseListResult from "./CourseListResult";
 
 const DEFAULT_COUNT = 20;
 
 const CourseList = () => {
   const [offset, setOffset] = useState(0);
   const { keyword, price } = useCourseFilter();
-  const { data, isLoading } = useCourses({
+  const { data, isLoading, isError } = useCourses({
     params: { keyword, price },
     offset,
     count: DEFAULT_COUNT,
@@ -45,29 +46,31 @@ const CourseList = () => {
       <CountWrapper>
         <Count>전체 {totalCount}개</Count>
       </CountWrapper>
-      <CourseCardContainer>
-        {isLoading
-          ? null
-          : data?.courses.map(({ id, label, title, description, src }) => {
-              return (
-                <CourseCard
-                  key={id}
-                  label={label}
-                  title={title}
-                  description={description}
-                  src={src}
-                />
-              );
-            })}
-      </CourseCardContainer>
-      {totalCount > 0 && (
-        <PaginationWrapper>
-          <Pagination
-            current={current}
-            last={last}
-            onPageChange={handlePageChange}
-          />
-        </PaginationWrapper>
+      {isLoading ? null : isError ? (
+        <CourseListResult message="에러가 발생했습니다." />
+      ) : totalCount > 0 ? (
+        <>
+          <CourseCardContainer>
+            {data?.courses.map((course) => (
+              <CourseCard
+                key={course.id}
+                label={course.label}
+                title={course.title}
+                description={course.description}
+                src={course.src}
+              />
+            ))}
+          </CourseCardContainer>
+          <PaginationWrapper>
+            <Pagination
+              current={current}
+              last={last}
+              onPageChange={handlePageChange}
+            />
+          </PaginationWrapper>
+        </>
+      ) : (
+        <CourseListResult message="검색 결과가 없습니다." />
       )}
     </Container>
   );
