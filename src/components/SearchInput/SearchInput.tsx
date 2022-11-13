@@ -69,7 +69,8 @@ const InputWrapper = styled.div`
 const Input = styled.input`
   width: 100%;
   height: 100%;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 400;
   background: transparent;
   border: none;
 
@@ -79,7 +80,8 @@ const Input = styled.input`
 
   ::placeholder {
     margin: 12px 0;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 400;
     color: gray;
   }
 `;
