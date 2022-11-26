@@ -94,10 +94,10 @@ const Count = styled.div`
 `;
 
 const CourseCardContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(296px, auto));
+  grid-gap: 16px;
+  justify-content: center;
 `;
 
 const PaginationWrapper = styled.div`
